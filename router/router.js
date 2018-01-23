@@ -13,6 +13,7 @@ router.put('/users', Auth.tokenVerifier, User.upsertUser);
 
 //Project
 router.get('/projects', Auth.tokenVerifier, Project.getProjects);
+router.get('/all/projects', ProjectHistory.getProjectHistories);
 router.get('/my/projects', Auth.tokenVerifier, ProjectHistory.getMyProjectHistories);
 router.put('/my/projects/:projectCode', Auth.tokenVerifier, ProjectHistory.upsertMyProjectHistories);
 router.delete('/my/projects/:projectCode', Auth.tokenVerifier, ProjectHistory.removeMyProjectHistories);
