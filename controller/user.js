@@ -17,6 +17,23 @@ const generateToken = (req, res) => {
     });
 };
 
+const registerUser = (req, res) => {
+    const employeeNumber = req.body.employeeNumber;
+
+    User.findOne({employeeNumber : employeeNumber})
+        .then(user => {
+            if (user) {
+                res.sendStatus(409);
+            } else {
+                upsertUser(req, res);
+            }
+        })
+        .catch((err) => {
+            console.log('===upsertUser:Error' + err.message);
+            res.sendStatus(500);
+        });
+};
+
 const upsertUser = (req, res) => {
     const employeeNumber = (req.employeeNumber)? req.employeeNumber : req.body.employeeNumber;
 
@@ -61,4 +78,4 @@ const login = (req, res, next) => {
 };
 
 
-module.exports = {upsertUser, generateToken, login};
+module.exports = {registerUser, upsertUser, generateToken, login};

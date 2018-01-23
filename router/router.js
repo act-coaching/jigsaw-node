@@ -8,7 +8,7 @@ const Auth = require('../middleware/auth');
 //User
 router.post('/login', User.login, User.generateToken);
 router.get('/logout', Auth.tokenVerifier, (req, res) => res.sendStatus(200));
-router.post('/users', User.upsertUser);
+router.post('/users', User.registerUser);
 router.put('/users', Auth.tokenVerifier, User.upsertUser);
 
 //Project
